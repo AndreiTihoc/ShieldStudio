@@ -5,7 +5,7 @@ import { LayoutDashboard, Shield, AlertTriangle, Wifi, Bot } from 'lucide-react'
 const Navbar: React.FC = () => {
   const navItems = [
     { path: '/dashboard', icon: LayoutDashboard, label: 'Overview' },
-    { path: '/threats', icon: AlertTriangle, label: 'Threats' },
+    { path: '/threats', icon: AlertTriangle, label: 'Recommendations' },
     { path: '/network', icon: Wifi, label: 'Network' },
     { path: '/bot', icon: Bot, label: 'ChatBot' }, // Added Bot link
   ];
