@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+@layer utilities {
+  .glow {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  }
+  
+  .glow-hover:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+}
