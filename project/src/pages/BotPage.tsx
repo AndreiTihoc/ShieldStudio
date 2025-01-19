@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Send, Bot } from 'lucide-react';
+import { getOpenAIResponse } from '../openaiApi';
 
 const BotPage: React.FC = () => {
   const [messages, setMessages] = useState([
@@ -10,21 +11,20 @@ const BotPage: React.FC = () => {
   ]);
   const [input, setInput] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
     // Add user message
     setMessages((prev) => [...prev, { type: 'user', content: input }]);
-    // Simulate bot response (replace with actual API integration)
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
-          type: 'bot',
-          content: 'This is a placeholder response.',
-        },
-      ]);
-    }, 1000);
+    // Fetch bot response from OpenAI API
+    const botResponse = await getOpenAIResponse(input);
+    setMessages((prev) => [
+      ...prev,
+      {
+        type: 'bot',
+        content: botResponse,
+      },
+    ]);
     setInput('');
   };
 
