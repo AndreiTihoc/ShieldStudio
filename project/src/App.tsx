@@ -5,6 +5,7 @@ import DashboardLayout from './components/DashboardLayout';
 import DashboardPage from './pages/DashboardPage';
 import ThreatsPage from './pages/ThreatsPage';
 import NetworkPage from './pages/NetworkPage';
+import BotPage from './pages/BotPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="threats" element={<ThreatsPage />} />
           <Route path="network" element={<NetworkPage />} />
+          <Route path="bot" element={<BotPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

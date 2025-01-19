@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend } from 'chart.js';
-import { Network, Wifi, Server, Waypoints, Smartphone, Building2, Flag, LandPlot, Goal } from 'lucide-react';
+import { Network, Wifi, Server, Waypoints, Smartphone, Building2, Flag, LandPlot, Goal, MapPin } from 'lucide-react';
 import { fetchIPData } from '../fetchIP';
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
@@ -18,7 +18,9 @@ const NetworkPage: React.FC = () => {
         { name: 'ISP', value: data.isp || 'None' },
         { name: 'Organization', value: data.org || 'None' },
         { name: 'Proxy', value: data.proxy || 'None' },
-        { name: 'Mobile', value: data.mobile || 'None' }
+        { name: 'Mobile', value: data.mobile || 'None' },
+        { name: 'Latitude', value: data.lat || 'None' },
+        { name: 'Longitude', value: data.lon || 'None' }
       ];
       setDevices(newDevices);
     }).catch(error => {
@@ -44,6 +46,9 @@ const NetworkPage: React.FC = () => {
         return <Waypoints className="w-6 h-6 text-cyan-400" />;
       case 'Mobile':
         return <Smartphone className="w-6 h-6 text-cyan-400" />;
+      case 'Latitude':
+      case 'Longitude':
+        return <MapPin className="w-6 h-6 text-cyan-400" />;
       default:
         return <Network className="w-6 h-6 text-cyan-400" />;
     }
