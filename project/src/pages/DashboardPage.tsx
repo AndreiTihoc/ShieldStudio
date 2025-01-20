@@ -13,6 +13,7 @@ import {
 } from 'chart.js';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 ChartJS.register(
     CategoryScale,
@@ -32,6 +33,8 @@ const DashboardPage: React.FC = () => {
   const [error, setError] = useState('');
   const [email, setEmail] = useState('');
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,7 +43,13 @@ const DashboardPage: React.FC = () => {
         console.log('Email passed to Dashboard:', email); // Log the email
         if (email) {
           const response = await axios.get(`https://api.xposedornot.com/v1/breach-analytics?email=${email}`);
-          setBreachData(response.data);
+          let data = response.data;
+
+          if (!data || !data.BreachMetrics || Object.keys(data.BreachMetrics).length === 0) {
+            navigate('/safe');
+          } else {
+            setBreachData(data);
+          }
         }
       } catch (error) {
         setError('Error fetching breach data');
