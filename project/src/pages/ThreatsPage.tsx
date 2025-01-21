@@ -20,6 +20,10 @@ const ThreatsPage: React.FC = () => {
       setEmail(storedEmail || '');
       console.log('Email passed to ThreatsPage:', storedEmail); // Log the email
       if (storedEmail) {
+        if(localStorage.getItem('isDataNull') === 'true') {
+          setResponse('Your email does not appear in any database records. You are safe, but always stay alert.');
+        }
+        else{
         try {
           const breachResponse = await axios.get(`https://api.xposedornot.com/v1/breach-analytics?email=${storedEmail}`);
           const { passwords_strength, risk, xposed_data } = breachResponse.data.BreachMetrics;
@@ -32,6 +36,7 @@ const ThreatsPage: React.FC = () => {
           console.error('Error fetching breach data:', error);
           setError('Error fetching breach data. Please try again later.');
         }
+      }
       } else {
         setError('No email found. Please log in again.');
       }
